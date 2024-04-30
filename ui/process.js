@@ -1,3 +1,5 @@
+#!/usr/bin/node
+
 import { readdir, readFile, writeFile } from 'node:fs/promises';
 import { parse, join } from 'path';
 import { JSDOM } from "jsdom";
