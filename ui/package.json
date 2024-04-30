@@ -6,8 +6,8 @@
   "private": true,
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "esbuild app.jsx --outdir=public/dist --jsx=automatic --bundle --watch --servedir=public --define:DEV=true",
-    "build": "esbuild app.jsx --outdir=public/dist --jsx=automatic --bundle --minify --define:DEV=false"
+    "start": "esbuild app.jsx --outdir=public/dist --jsx=automatic --bundle --sourcemap --watch --servedir=public --define:DEV=true",
+    "build": "esbuild app.jsx --outdir=public/dist --jsx=automatic --bundle --sourcemap --minify --define:DEV=false"
   },
   "author": "",
   "license": "MIT",
