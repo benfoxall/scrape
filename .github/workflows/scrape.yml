@@ -5,6 +5,9 @@ on:
     - cron: "0 * * * *" # Runs every hour, adjust as needed
   workflow_dispatch: # Allows manual trigger from GitHub UI
 
+permissions:
+  contents: write
+
 jobs:
   scrape-and-commit:
     runs-on: ubuntu-latest
