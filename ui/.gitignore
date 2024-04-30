@@ -2,4 +2,4 @@ collected
 processed.json
 node_modules
 dist
-public/data.json
+public/hn.json

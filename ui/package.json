@@ -5,7 +5,7 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "data": "./collect.sh && node process.js",
+    "data": "node fetch-data.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "esbuild src/app.jsx --outdir=public/dist --jsx=automatic --bundle --sourcemap --watch --servedir=public --define:DEV=true",
     "build": "esbuild src/app.jsx --outdir=public/dist --jsx=automatic --bundle --sourcemap --minify --define:DEV=false"
