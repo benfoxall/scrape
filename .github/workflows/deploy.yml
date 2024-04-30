@@ -27,7 +27,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          fetch-depth: ""
+          fetch-depth: 0
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
