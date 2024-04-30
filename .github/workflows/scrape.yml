@@ -2,7 +2,7 @@ name: Scrape Website
 
 on:
   schedule:
-    - cron: "0 * * * *" # Runs every hour, adjust as needed
+    - cron: "*/15 * * * *" # Runs every 15 mins
   workflow_dispatch: # Allows manual trigger from GitHub UI
 
 permissions:
