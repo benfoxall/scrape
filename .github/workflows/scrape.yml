@@ -21,8 +21,8 @@ jobs:
 
       - name: Commit and push if there are changes
         run: |
-          git config --global user.name 'Your Name'
-          git config --global user.email 'your-email@example.com'
-          git add data/example.com.html
+          git config --global user.name 'Scrape Bot'
+          git config --global user.email 'scrape.bot@example.com'
+          git add data
           git commit -m "Update data" || echo "No changes to commit"
           git push
