@@ -5,7 +5,7 @@ import { parse, join } from 'path';
 import { JSDOM } from "jsdom";
 
 const directory = './collected'
-const destination = './processed.json'
+const destination = './public/data.json'
 
 const files = await readdir(directory);
 const output = [];
