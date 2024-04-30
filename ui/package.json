@@ -5,7 +5,8 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "esbuild app.js --outdir=public --bundle --watch --servedir=public"
   },
   "author": "",
   "license": "MIT",
