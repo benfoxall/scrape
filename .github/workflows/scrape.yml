@@ -1,0 +1,28 @@
+name: Scrape Website
+
+on:
+  schedule:
+    - cron: "0 * * * *" # Runs every hour, adjust as needed
+  workflow_dispatch: # Allows manual trigger from GitHub UI
+
+jobs:
+  scrape-and-commit:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v3
+
+      - name: Create data directory
+        run: mkdir -p data
+
+      - name: Fetch Hacker News
+        run: curl https://news.ycombinator.com > data/hacker-news.html
+
+      - name: Commit and push if there are changes
+        run: |
+          git config --global user.name 'Your Name'
+          git config --global user.email 'your-email@example.com'
+          git add data/example.com.html
+          git commit -m "Update data" || echo "No changes to commit"
+          git push
