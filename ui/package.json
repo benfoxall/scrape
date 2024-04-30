@@ -6,12 +6,15 @@
   "private": true,
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "esbuild app.js --outdir=public --bundle --watch --servedir=public"
+    "start": "esbuild app.jsx --outdir=public/dist --jsx=automatic --bundle --watch --servedir=public --define:DEV=true",
+    "build": "esbuild app.jsx --outdir=public/dist --jsx=automatic --bundle --minify --define:DEV=false"
   },
   "author": "",
   "license": "MIT",
   "devDependencies": {
     "esbuild": "0.20.2",
-    "jsdom": "24.0.0"
+    "jsdom": "24.0.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
   }
 }
