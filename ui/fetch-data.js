@@ -1,7 +1,6 @@
-import { readdir, readFile, writeFile } from 'node:fs/promises';
+import { writeFile } from 'node:fs/promises';
 import { promisify } from 'node:util';
 import { exec } from 'node:child_process';
-import { parse, join } from 'path';
 import { JSDOM } from "jsdom";
 
 const execP = promisify(exec);
