@@ -6,7 +6,7 @@ FILE="../data/hacker-news.html"
 DEST="collected"
 
 mkdir -p $DEST
-rm $DEST/*
+rm -f $DEST/*
 
 # Get details like commit hash, date as Unix timestamp, and author
 git log -n 1000 --pretty=format:"%h %at" -- "$FILE" | while read -r commit timestamp; do
