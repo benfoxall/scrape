@@ -17,12 +17,12 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Fetch Hacker News
-        run: curl https://news.ycombinator.com > hacker-news.latest.html
+        run: curl https://news.ycombinator.com > hacker-news.html
 
       - name: Commit data
         run: |
           git config --global user.name 'Scrape Bot'
           git config --global user.email 'scrape.bot@example.com'
-          git add hacker-news.latest.html
-          git commit -m "Update data" || echo "No changes to commit"
+          git add hacker-news.html
+          git commit -m ":robot: scraped" || echo "No changes to commit"
           git push

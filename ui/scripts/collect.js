@@ -1,7 +1,7 @@
 import { writeFile } from 'node:fs/promises';
 import { hn2json, historyOf } from './util.js';
 
-const file = "../hacker-news.latest.html"
+const file = "../hacker-news.html"
 const destination = 'public/hn.json'
 
 const aggregated = [];
