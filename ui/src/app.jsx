@@ -1,7 +1,17 @@
 import { createRoot } from "react-dom/client";
+import { View } from "./View";
 
 const root = createRoot(document.getElementById("app"));
-root.render(<h1>Hello, world</h1>);
+
+try {
+  const res = await fetch("./hn.json");
+  const json = await res.json();
+
+  root.render(<View data={json} />);
+} catch (e) {
+  console.error(e);
+  root.render(<h1>Failed to fetch data</h1>);
+}
 
 if (DEV) {
   new EventSource("/esbuild").addEventListener("change", () =>
