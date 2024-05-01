@@ -18,12 +18,12 @@ export const View = ({ data }) => {
         <>
           <h3>{new Date(current.at).toLocaleString()}</h3>
 
-          <ul>
+          <ol>
             {current.entries.map(
               ({ id, rank, score, text, url, user, created, comments }) => (
                 <li key={id}>
                   <h4>
-                    {rank}. {text}
+                    <a href={url}>{text}</a>
                   </h4>
                   <p>
                     {score} points by {user}, {comments} comments
@@ -31,7 +31,7 @@ export const View = ({ data }) => {
                 </li>
               )
             )}
-          </ul>
+          </ol>
         </>
       )}
     </>
