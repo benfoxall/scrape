@@ -15,16 +15,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: "20"
-
-      - name: Install dependencies
-        run: npm ci
 
       - name: Fetch Hacker News
         run: curl https://news.ycombinator.com > hacker-news.latest.html
@@ -35,15 +25,4 @@ jobs:
           git config --global user.email 'scrape.bot@example.com'
           git add hacker-news.latest.html
           git commit -m "Update data" || echo "No changes to commit"
-
-      - name: Generate summary data
-        run: npm run aggregate
-
-      - name: Commit data
-        run: |
-          git add hacker-news.json
-          git commit -m "Update aggregate" || echo "No changes to commit"
-
-      - name: push
-        run: |
           git push
