@@ -7,8 +7,8 @@
   "scripts": {
     "data": "node fetch-data.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "esbuild src/app.jsx --outdir=public/dist --jsx=automatic --bundle --sourcemap --watch --servedir=public --define:DEV=true",
-    "build": "esbuild src/app.jsx --outdir=public/dist --jsx=automatic --bundle --sourcemap --minify --define:DEV=false"
+    "start": "esbuild src/app.jsx --outdir=public/dist --jsx=automatic --format=esm --bundle --sourcemap --watch --servedir=public --define:DEV=true",
+    "build": "esbuild src/app.jsx --outdir=public/dist --jsx=automatic --format=esm --bundle --sourcemap --minify --define:DEV=false"
   },
   "author": "",
   "license": "MIT",
