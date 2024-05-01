@@ -1,8 +1,8 @@
 import { writeFile } from 'node:fs/promises';
 import { hn2json, historyOf } from './util.js';
 
-const file = "hacker-news.latest.html"
-const destination = 'hacker-news.json'
+const file = "../hacker-news.latest.html"
+const destination = 'public/hn.json'
 
 const aggregated = [];
 
@@ -21,7 +21,3 @@ for await (const { time, contents } of historyOf(file)) {
 await writeFile(destination, JSON.stringify(aggregated));
 
 console.log(`Wrote ${aggregated.length} entries to ${destination}`)
-
-
-
-
