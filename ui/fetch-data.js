@@ -42,7 +42,7 @@ for await (const { time, contents } of historyOf(file)) {
     }
 
     output.push({
-        at: time * 1000, // ready for new Date(at)
+        at: time,
         entries
     })
 }
