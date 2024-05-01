@@ -2,7 +2,7 @@ name: Scrape Website
 
 on:
   schedule:
-    - cron: "*/30 * * * *" # Runs every 30 mins
+    - cron: "*/20 * * * *" # Runs every 20 mins
   workflow_dispatch: # Allows manual trigger from GitHub UI
 
 permissions:
@@ -13,19 +13,37 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Check out the repo
-        uses: actions/checkout@v3
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
-      - name: Create data directory
-        run: mkdir -p data
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install dependencies
+        run: npm ci
 
       - name: Fetch Hacker News
         run: curl https://news.ycombinator.com > data/hacker-news.html
 
-      - name: Commit and push if there are changes
+      - name: Commit data
         run: |
           git config --global user.name 'Scrape Bot'
           git config --global user.email 'scrape.bot@example.com'
           git add data
           git commit -m "Update data" || echo "No changes to commit"
+
+      - name: Generate summary data
+        run: npm run aggregate
+
+      - name: Commit data
+        run: |
+          git add data
+          git commit -m "Update aggregate" || echo "No changes to commit"
+
+      - name: push
+        run: |
           git push
