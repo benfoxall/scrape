@@ -14,6 +14,8 @@ git add $TARGET
 git commit -m ":robot: scraped to $TARGET"
 ```
 
+This is run automatically by [.github/workflows/scrape.yml](.github/workflows/scrape.yml)
+
 ### Extracting file history
 
 ```bash
