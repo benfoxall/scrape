@@ -18,8 +18,6 @@ export const View = ({ data }) => {
         <>
           <h3>{new Date(current.at).toLocaleString()}</h3>
 
-          <p>{JSON.stringify(current.entries[0])}</p>
-
           <ul>
             {current.entries.map(
               ({ id, rank, score, text, url, user, created, comments }) => (

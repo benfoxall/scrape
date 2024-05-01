@@ -1,3 +1,4 @@
+import "./app.css";
 import { createRoot } from "react-dom/client";
 import { View } from "./View";
 

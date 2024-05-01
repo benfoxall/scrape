@@ -1,0 +1,23 @@
+body {
+  font-family: Verdana, Geneva, sans-serif;
+  background-color: #f6f6ef;
+}
+* {
+  font-weight: 400;
+}
+
+ul {
+  padding: 0;
+}
+
+li {
+  margin-bottom: 1em;
+}
+li * {
+  margin: 0.2em;
+  font-size: 10pt;
+}
+
+li p {
+  color: #828282;
+}
