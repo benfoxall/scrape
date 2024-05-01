@@ -1,19 +1,19 @@
 import { useState } from "react";
 
 export const View = ({ data }) => {
-  const [i, setValue] = useState(0);
+  const [idx, setIdx] = useState(0);
 
-  const current = data[i];
+  const current = data[idx];
 
   return (
     <>
       <input
         type="range"
-        value={i}
+        value={idx}
         max={data.length - 1}
-        onChange={(e) => setValue(e.target.valueAsNumber)}
+        onChange={(e) => setIdx(e.target.valueAsNumber)}
       />
-      {i + 1} / {data.length}
+      {idx + 1} / {data.length}
       {current && (
         <>
           <h3>{new Date(current.at).toLocaleString()}</h3>
@@ -26,7 +26,10 @@ export const View = ({ data }) => {
                     <a href={url}>{text}</a>
                   </h4>
                   <p>
-                    {score} points by {user}, {comments} comments
+                    {score} points by {user},{" "}
+                    <a href={`https://news.ycombinator.com/item?id=${id}`}>
+                      {comments} comments
+                    </a>
                   </p>
                 </li>
               )

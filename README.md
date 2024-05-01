@@ -1,6 +1,6 @@
 # Flat Scraper
 
-This scrapes content from a webpage (hacker news) writes it to git for later use.
+This pulls the [HN](https://news.ycombinator.com/) front page to [hacker-news.html](hacker-news.html) and uses git log/show to access a history of changes.
 
 See [git scraping](https://simonwillison.net/2020/Oct/9/git-scraping/) & [Flat Data](https://githubnext.com/projects/flat-data) for more info about the approach.
 
