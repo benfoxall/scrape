@@ -1,0 +1,33 @@
+.list {
+  padding: 0;
+}
+.row {
+  display: flex;
+  list-style: none;
+}
+
+.row > button {
+  background-color: rgba(193, 192, 192, 0.133);
+  color: #0005;
+  border-radius: 100%;
+  border: none;
+  width: 2.5em;
+  height: 2.5em;
+  font-weight: 800;
+  cursor: pointer;
+  margin: 0 1em;
+}
+
+.row:hover > button {
+  color: #000;
+}
+
+.row > span {
+  margin: 0 0.5em;
+}
+
+.slider {
+  display: flex;
+  flex-direction: column;
+  margin: 1em 2em;
+}

@@ -21,13 +21,16 @@ li * {
 }
 
 li p {
-  color: #828282;
+  color: #515151;
   font-size: 7pt;
 }
 
 a {
   color: inherit;
   text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
 }
 
 .time-graph {
@@ -43,9 +46,6 @@ a {
   z-index: -1;
 }
 
-.time-graph > ol {
-}
-
 path {
   fill: transparent;
   transition: all 0.5s;
@@ -53,9 +53,4 @@ path {
 
 .active {
   background-color: #fc0;
-}
-
-label {
-  display: flex;
-  flex-direction: column;
 }
