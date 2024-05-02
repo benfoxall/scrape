@@ -8,11 +8,14 @@ body {
 
 ol {
   font-size: 10pt;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+}
+li {
+  padding: 0.5em 0;
 }
 
-li {
-  margin-bottom: 0.5em;
-}
 li * {
   margin: 0;
 }
@@ -25,4 +28,34 @@ li p {
 a {
   color: inherit;
   text-decoration: none;
+}
+
+.time-graph {
+  position: relative;
+  margin-top: 2em;
+}
+
+.time-graph > svg {
+  /* flex: 1; */
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  z-index: -1;
+}
+
+.time-graph > ol {
+}
+
+path {
+  fill: transparent;
+  transition: all 0.5s;
+}
+
+.active {
+  background-color: #fc0;
+}
+
+label {
+  display: flex;
+  flex-direction: column;
 }
