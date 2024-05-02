@@ -12,16 +12,6 @@ const colours = [
   "#dc0ab4",
   "#b3d4ff",
   "#00bfa0",
-
-  // "#b33dc6",
-  // "#27aeef",
-  // "#87bc45",
-  // "#bdcf32",
-  // "#ede15b",
-  // "#edbf33",
-  // "#ef9b20",
-  // "#f46a9b",
-  // "#ea5545",
 ];
 
 function colour(idx) {
@@ -30,7 +20,6 @@ function colour(idx) {
 
 export const View = ({ data }) => {
   const [idx, setIdx] = useState(0);
-  const [hov, setHov] = useState(0);
   const [highlights, setHighlights] = useState([]);
 
   const current = data[idx];
@@ -57,44 +46,51 @@ export const View = ({ data }) => {
       {current && (
         <ol className={styles.list}>
           {current.entries.map(
-            ({ id, rank, score, text, url, user, created, comments }) => (
-              <li
-                key={id}
-                onClick={() => setHov(id)}
-                className={styles.row}
-                style={{ color: colour(highlights.indexOf(id)) }}
-              >
-                <button
-                  aria-label="highlight"
-                  onClick={() => highlight(id)}
-                  style={{ background: colour(highlights.indexOf(id)) }}
+            ({ id, rank, score, text, url, user, created, comments }) => {
+              const colourIndex = highlights.indexOf(id);
+              const itemColor = colour(colourIndex);
+
+              return (
+                <li
+                  key={id}
+                  onClick={() => setHov(id)}
+                  className={styles.row}
+                  style={{ color: itemColor }}
                 >
-                  →
-                </button>
-                <span>{rank}.</span>
-                <div>
-                  <h4>
-                    <a
-                      href={new URL(
-                        url,
-                        "https://news.ycombinator.com"
-                      ).toString()}
-                    >
-                      {text}
-                    </a>
-                  </h4>
-                  <p>
-                    {score} points by {user},{" "}
-                    <a href={`https://news.ycombinator.com/item?id=${id}`}>
-                      {comments} comments
-                    </a>
-                  </p>
-                </div>
-              </li>
-            )
+                  <button
+                    aria-label="highlight"
+                    onClick={() => highlight(id)}
+                    style={{ background: itemColor }}
+                  >
+                    →
+                  </button>
+                  <span>{rank}.</span>
+                  <div>
+                    <h4>
+                      <a
+                        href={new URL(
+                          url,
+                          "https://news.ycombinator.com"
+                        ).toString()}
+                      >
+                        {text}
+                      </a>
+                    </h4>
+                    <p>
+                      {score} points by {user},{" "}
+                      <a href={`https://news.ycombinator.com/item?id=${id}`}>
+                        {comments} comments
+                      </a>
+                    </p>
+                  </div>
+                </li>
+              );
+            }
           )}
         </ol>
       )}
+
+      <hr />
     </>
   );
 };
