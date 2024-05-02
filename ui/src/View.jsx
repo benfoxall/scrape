@@ -11,7 +11,7 @@ export const View = ({ data }) => {
     <>
       <label>
         hacker news
-        {current && ` – ${formatDistanceToNow(new Date(current.at))} ago`}
+        {current && ` - ${formatDistanceToNow(new Date(current.at))} ago`}
         <br />
         <input
           type="range"
