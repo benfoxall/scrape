@@ -52,6 +52,17 @@
   margin: 1em;
 }
 
+.nav a {
+  padding: 0.5em;
+  border-radius: 5px;
+}
+
+.active {
+  background: rgb(15, 253, 138);
+}
+
 .graphContainer {
   margin: 1em;
+  max-width: 100%;
+  overflow-x: scroll;
 }

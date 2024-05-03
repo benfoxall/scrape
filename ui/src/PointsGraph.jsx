@@ -36,7 +36,7 @@ export const PointsGraph = ({ data, current, highlights }) => {
 
   return (
     <>
-      <svg style={{ height, width: "100%" }}>
+      <svg style={{ height: 310, width: data.length * 20 }}>
         <line
           x1={0}
           y1={0}

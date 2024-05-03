@@ -107,13 +107,25 @@ export const View = ({ data }) => {
       </a>
 
       <nav className={styles.nav}>
-        <a onClick={setSection} href="#rank">
+        <a
+          onClick={setSection}
+          href="#rank"
+          className={graph === "#rank" ? styles.active : ""}
+        >
           Ranking
         </a>
-        <a onClick={setSection} href="#votes">
+        <a
+          onClick={setSection}
+          href="#votes"
+          className={graph === "#votes" ? styles.active : ""}
+        >
           Votes
         </a>
-        <a onClick={setSection} href="#comment">
+        <a
+          onClick={setSection}
+          href="#comment"
+          className={graph === "#comment" ? styles.active : ""}
+        >
           Comments
         </a>
       </nav>
