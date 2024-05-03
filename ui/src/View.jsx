@@ -2,6 +2,8 @@ import { useState } from "react";
 import { formatDistanceToNow } from "date-fns";
 import styles from "./View.module.css";
 import { RankGraph } from "./RankGraph";
+import { PointsGraph } from "./PointsGraph";
+import { CommentsGraph } from "./CommentsGraph";
 
 const colours = [
   "#e60049",
@@ -22,7 +24,7 @@ export function colour(idx) {
 export const View = ({ data }) => {
   const [index, setIndex] = useState(0);
   const [highlights, setHighlights] = useState([]);
-  const [collapsed, setCollapsed] = useState(true);
+  const [collapsed, setCollapsed] = useState(false);
 
   const current = data[index];
 
@@ -98,6 +100,8 @@ export const View = ({ data }) => {
       </a>
 
       <RankGraph data={data} current={current} highlights={highlights} />
+      <PointsGraph data={data} current={current} highlights={highlights} />
+      <CommentsGraph data={data} current={current} highlights={highlights} />
     </>
   );
 };
