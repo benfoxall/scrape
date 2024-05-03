@@ -1,4 +1,4 @@
-# Flat Scraper
+# Recent News
 
 This pulls the [HN](https://news.ycombinator.com/) front page to [hacker-news.html](hacker-news.html) and uses git log/show to access a history of changes.
 
@@ -24,5 +24,3 @@ do
     git show "$commit:$TARGET" > tmp_${timestr}_${commit}.html
 done
 ```
-
-## UI

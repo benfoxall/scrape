@@ -6,6 +6,19 @@ body {
   font-weight: 400;
 }
 
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header a {
+  transition: all 0.1s;
+}
+header a:hover {
+  transform: scale(1.1) rotate(5deg);
+}
+
 ol {
   font-size: 10pt;
   display: flex;
