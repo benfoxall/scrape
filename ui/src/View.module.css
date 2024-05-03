@@ -1,5 +1,6 @@
 .list {
   padding: 0;
+  overflow: scroll;
 }
 .row {
   display: flex;
@@ -30,4 +31,17 @@
   display: flex;
   flex-direction: column;
   margin: 1em 2em;
+}
+
+.collapse {
+  margin: 2em 1em;
+  display: block;
+  border-bottom: 1px dashed #0002;
+  text-align: center;
+  color: #888;
+}
+
+.collapse:hover {
+  color: #000;
+  text-decoration: none;
 }

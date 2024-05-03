@@ -22,6 +22,7 @@ export function colour(idx) {
 export const View = ({ data }) => {
   const [index, setIndex] = useState(0);
   const [highlights, setHighlights] = useState([]);
+  const [collapsed, setCollapsed] = useState(true);
 
   const current = data[index];
 
@@ -44,53 +45,57 @@ export const View = ({ data }) => {
           onChange={(e) => setIndex(e.target.valueAsNumber)}
         />
       </label>
-      {current && (
-        <ol className={styles.list}>
-          {current.entries
-            // .slice(0, 4)
-            .map(({ id, rank, score, text, url, user, created, comments }) => {
-              const colourIndex = highlights.indexOf(id);
-              const itemColor = colour(colourIndex);
 
-              return (
-                <li
-                  key={id}
-                  className={styles.row}
-                  style={{ color: itemColor }}
+      <ol className={styles.list} style={{ height: collapsed ? "20vh" : "" }}>
+        {current.entries
+          // .slice(0, 4)
+          .map(({ id, rank, score, text, url, user, created, comments }) => {
+            const colourIndex = highlights.indexOf(id);
+            const itemColor = colour(colourIndex);
+
+            return (
+              <li key={id} className={styles.row} style={{ color: itemColor }}>
+                <button
+                  aria-label="highlight"
+                  onClick={() => highlight(id)}
+                  style={{ background: itemColor }}
                 >
-                  <button
-                    aria-label="highlight"
-                    onClick={() => highlight(id)}
-                    style={{ background: itemColor }}
-                  >
-                    →
-                  </button>
-                  <span>{rank}.</span>
-                  <div>
-                    <h4>
-                      <a
-                        href={new URL(
-                          url,
-                          "https://news.ycombinator.com"
-                        ).toString()}
-                      >
-                        {text}
-                      </a>
-                    </h4>
-                    <p>
-                      {score} points by {user},{" "}
-                      <a href={`https://news.ycombinator.com/item?id=${id}`}>
-                        {comments} comments
-                      </a>
-                    </p>
-                  </div>
-                </li>
-              );
-            })}
-        </ol>
-      )}
+                  →
+                </button>
+                <span>{rank}.</span>
+                <div>
+                  <h4>
+                    <a
+                      href={new URL(
+                        url,
+                        "https://news.ycombinator.com"
+                      ).toString()}
+                    >
+                      {text}
+                    </a>
+                  </h4>
+                  <p>
+                    {score} points by {user},{" "}
+                    <a href={`https://news.ycombinator.com/item?id=${id}`}>
+                      {comments} comments
+                    </a>
+                  </p>
+                </div>
+              </li>
+            );
+          })}
+      </ol>
 
-      <hr />
+      <a
+        href="#"
+        className={styles.collapse}
+        onClick={(e) => {
+          e.preventDefault();
+          setCollapsed((c) => !c);
+        }}
+      >
+        {collapsed ? "⬇" : "⬆"}
+      </a>
 
       <RankGraph data={data} current={current} highlights={highlights} />
     </>
