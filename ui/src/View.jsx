@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { formatDistanceToNow } from "date-fns";
 import styles from "./View.module.css";
+import { RankGraph } from "./RankGraph";
 
 const colours = [
   "#e60049",
@@ -14,15 +15,15 @@ const colours = [
   "#00bfa0",
 ];
 
-function colour(idx) {
+export function colour(idx) {
   return colours[idx % colours.length];
 }
 
 export const View = ({ data }) => {
-  const [idx, setIdx] = useState(0);
+  const [index, setIndex] = useState(0);
   const [highlights, setHighlights] = useState([]);
 
-  const current = data[idx];
+  const current = data[index];
 
   function highlight(item) {
     if (highlights.includes(item)) {
@@ -38,22 +39,22 @@ export const View = ({ data }) => {
         {current && `${formatDistanceToNow(new Date(current.at))} ago`}
         <input
           type="range"
-          value={idx}
+          value={index}
           max={data.length - 1}
-          onChange={(e) => setIdx(e.target.valueAsNumber)}
+          onChange={(e) => setIndex(e.target.valueAsNumber)}
         />
       </label>
       {current && (
         <ol className={styles.list}>
-          {current.entries.map(
-            ({ id, rank, score, text, url, user, created, comments }) => {
+          {current.entries
+            // .slice(0, 4)
+            .map(({ id, rank, score, text, url, user, created, comments }) => {
               const colourIndex = highlights.indexOf(id);
               const itemColor = colour(colourIndex);
 
               return (
                 <li
                   key={id}
-                  onClick={() => setHov(id)}
                   className={styles.row}
                   style={{ color: itemColor }}
                 >
@@ -85,12 +86,13 @@ export const View = ({ data }) => {
                   </div>
                 </li>
               );
-            }
-          )}
+            })}
         </ol>
       )}
 
       <hr />
+
+      <RankGraph data={data} current={current} highlights={highlights} />
     </>
   );
 };
