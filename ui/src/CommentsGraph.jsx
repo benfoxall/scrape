@@ -36,7 +36,6 @@ export const CommentsGraph = ({ data, current, highlights }) => {
 
   return (
     <>
-      <h3>Comments</h3>
       <svg style={{ height, width: "100%" }}>
         <line
           x1={0}

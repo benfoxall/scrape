@@ -34,7 +34,6 @@ export const RankGraph = ({ data, current, highlights }) => {
 
   return (
     <>
-      <h3>Ranking</h3>
       <svg style={{ height: 310, width: "100%" }}>
         <line
           x1={0}

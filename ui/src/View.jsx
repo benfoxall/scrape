@@ -36,6 +36,13 @@ export const View = ({ data }) => {
     }
   }
 
+  const [graph, setGraph] = useState("#rank");
+
+  function setSection(e) {
+    e.preventDefault();
+    setGraph(e.target.getAttribute("href"));
+  }
+
   return (
     <>
       <label className={styles.slider}>
@@ -99,9 +106,34 @@ export const View = ({ data }) => {
         {collapsed ? "⬇" : "⬆"}
       </a>
 
-      <RankGraph data={data} current={current} highlights={highlights} />
-      <PointsGraph data={data} current={current} highlights={highlights} />
-      <CommentsGraph data={data} current={current} highlights={highlights} />
+      <nav className={styles.nav}>
+        <a onClick={setSection} href="#rank">
+          Ranking
+        </a>
+        <a onClick={setSection} href="#votes">
+          Votes
+        </a>
+        <a onClick={setSection} href="#comment">
+          Comments
+        </a>
+      </nav>
+
+      <section class={styles.graphContainer}>
+        {graph === "#rank" && (
+          <RankGraph data={data} current={current} highlights={highlights} />
+        )}
+        {graph === "#votes" && (
+          <PointsGraph data={data} current={current} highlights={highlights} />
+        )}
+
+        {graph === "#comment" && (
+          <CommentsGraph
+            data={data}
+            current={current}
+            highlights={highlights}
+          />
+        )}
+      </section>
     </>
   );
 };
