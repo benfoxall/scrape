@@ -24,7 +24,7 @@ export function colour(idx) {
 export const View = ({ data }) => {
   const [index, setIndex] = useState(0);
   const [highlights, setHighlights] = useState([]);
-  const [collapsed, setCollapsed] = useState(false);
+  const [collapsed, setCollapsed] = useState(true);
 
   const current = data[index];
 
