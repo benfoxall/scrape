@@ -6,7 +6,7 @@ const destination = 'public/hn.json'
 
 const aggregated = [];
 
-for await (const { time, contents } of historyOf(file)) {
+for await (const { time, contents } of historyOf(file, 500)) {
 
     const entries = hn2json(contents)
 
@@ -15,7 +15,6 @@ for await (const { time, contents } of historyOf(file)) {
         entries
     })
 
-    if (aggregated.length > 500) break;
 }
 
 await writeFile(destination, JSON.stringify(aggregated));
