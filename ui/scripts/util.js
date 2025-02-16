@@ -40,9 +40,10 @@ export function hn2json(html) {
 
 
 /** iterate through the history of a file */
-export async function* historyOf(file) {
-    const { stdout } = await execP(`git log --pretty=format:"%H %at" -- "${file}"`);
-    const entries = stdout.split('\n').map(row => row.split(' '));
+export async function* historyOf(file, count) {
+    const { stdout } = await execP(`git log --pretty=format:"%H %at" -- "${file}" | head -n ${count}`);
+    const entries = stdout.split('\n').filter(l => l.length).map(row => row.split(' '));
+
     for (const [commit, timestr] of entries) {
 
         const time = new Date(parseFloat(timestr) * 1000)
