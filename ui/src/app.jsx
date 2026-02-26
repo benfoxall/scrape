@@ -13,7 +13,7 @@ function Router({ data }) {
     return () => window.removeEventListener("hashchange", handler);
   }, []);
 
-  return hash === "#cool" ? <CoolView data={data} /> : <View data={data} />;
+  return hash === "#story-arcs" ? <CoolView data={data} /> : <View data={data} />;
 }
 
 const root = createRoot(document.getElementById("app"));
