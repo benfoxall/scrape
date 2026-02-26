@@ -13,6 +13,8 @@ function Router({ data }) {
     return () => window.removeEventListener("hashchange", handler);
   }, []);
 
+  // #rank / #votes / #comment are consumed internally by View via preventDefault,
+  // so they never trigger hashchange and don't affect routing here.
   return hash === "#story-arcs" ? <CoolView data={data} /> : <View data={data} />;
 }
 

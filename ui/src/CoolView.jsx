@@ -15,6 +15,16 @@ function yScale(rank) {
   return M.top + ((rank - 1) / (MAX_RANK - 1)) * PH;
 }
 
+function storyColor(peakRank) {
+  if (peakRank <= 3) return "#ff6600";
+  if (peakRank <= 10) return "#0088cc";
+  return "#888";
+}
+
+function storyUrl(url) {
+  return new URL(url, "https://news.ycombinator.com").href;
+}
+
 function buildStories(data) {
   const map = new Map();
   for (const { at, entries } of data) {
@@ -66,15 +76,15 @@ function StoryPath({ story, isHovered, dimmed, onHover }) {
     strokeWidth = 3;
     opacity = 1;
   } else if (story.peakRank <= 3) {
-    stroke = "#ff6600";
+    stroke = storyColor(story.peakRank);
     strokeWidth = 1.5;
     opacity = dimmed ? 0.08 : 0.75;
   } else if (story.peakRank <= 10) {
-    stroke = "#0088cc";
+    stroke = storyColor(story.peakRank);
     strokeWidth = 1;
     opacity = dimmed ? 0.04 : 0.35;
   } else {
-    stroke = "#666";
+    stroke = storyColor(story.peakRank);
     strokeWidth = 0.6;
     opacity = dimmed ? 0.02 : 0.18;
   }
@@ -87,8 +97,11 @@ function StoryPath({ story, isHovered, dimmed, onHover }) {
       strokeWidth={strokeWidth}
       opacity={opacity}
       style={{ cursor: "pointer" }}
+      tabIndex={0}
       onMouseEnter={() => onHover(story.id)}
       onMouseLeave={() => onHover(null)}
+      onFocus={() => onHover(story.id)}
+      onBlur={() => onHover(null)}
     />
   );
 }
@@ -100,10 +113,7 @@ function DomainChart({ stories }) {
       if (!story.url) continue;
       let domain;
       try {
-        const base = story.url.startsWith("http")
-          ? story.url
-          : `https://news.ycombinator.com${story.url}`;
-        domain = new URL(base).hostname.replace(/^www\./, "");
+        domain = new URL(story.url, "https://news.ycombinator.com").hostname.replace(/^www\./, "");
       } catch {
         continue;
       }
@@ -160,12 +170,7 @@ function DomainChart({ stories }) {
             <div
               style={{
                 width: `${((count / maxCount) * 100).toFixed(1)}%`,
-                background:
-                  topRank <= 3
-                    ? "#ff6600"
-                    : topRank <= 10
-                      ? "#0088cc"
-                      : "#888",
+                background: storyColor(topRank),
                 height: "100%",
                 borderRadius: 3,
               }}
@@ -205,9 +210,12 @@ export function CoolView({ data }) {
   const [hoveredId, setHoveredId] = useState(null);
   const stories = useMemo(() => buildStories(data), [data]);
   const hovered = hoveredId ? stories.find((s) => s.id === hoveredId) : null;
-  const avgPeakScore = Math.round(
-    stories.reduce((sum, s) => sum + s.peakScore, 0) / stories.length
-  );
+  const avgPeakScore =
+    stories.length > 0
+      ? Math.round(
+          stories.reduce((sum, s) => sum + s.peakScore, 0) / stories.length
+        )
+      : 0;
 
   return (
     <main style={{ padding: "1.5rem", maxWidth: 900, margin: "0 auto" }}>
@@ -242,6 +250,8 @@ export function CoolView({ data }) {
 
         <svg
           viewBox={`0 0 ${CHART_W} ${CHART_H}`}
+          role="img"
+          aria-labelledby="chart-title"
           style={{
             width: "100%",
             display: "block",
@@ -250,13 +260,12 @@ export function CoolView({ data }) {
             background: "#fafafa",
           }}
         >
-          <rect
-            x={M.left}
-            y={M.top}
-            width={PW}
-            height={PH}
-            fill="white"
-          />
+          <title id="chart-title">
+            Story rank trajectories over time: each line shows a story's rank
+            (1 = top) across the hours it spent on the HN front page.
+          </title>
+
+          <rect x={M.left} y={M.top} width={PW} height={PH} fill="white" />
 
           {/* Rank grid lines */}
           {[1, 5, 10, 15, 20, 25, 30].map((r) => {
@@ -387,13 +396,7 @@ export function CoolView({ data }) {
             <>
               <div style={{ fontWeight: 700, marginBottom: 3 }}>
                 <a
-                  href={
-                    hovered.url
-                      ? hovered.url.startsWith("http")
-                        ? hovered.url
-                        : `https://news.ycombinator.com${hovered.url}`
-                      : "#"
-                  }
+                  href={hovered.url ? storyUrl(hovered.url) : "#"}
                   style={{ color: "inherit", textDecoration: "none" }}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -402,7 +405,8 @@ export function CoolView({ data }) {
                 </a>
               </div>
               <div style={{ fontSize: "0.83rem", color: "#888" }}>
-                Peak rank: <strong style={{ color: "#444" }}>#{hovered.peakRank}</strong>
+                Peak rank:{" "}
+                <strong style={{ color: "#444" }}>#{hovered.peakRank}</strong>
                 &ensp;·&ensp;Peak score:{" "}
                 <strong style={{ color: "#444" }}>{hovered.peakScore} pts</strong>
                 &ensp;·&ensp;Visible for:{" "}

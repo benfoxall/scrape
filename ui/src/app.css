@@ -13,6 +13,12 @@ header {
   margin: 1em;
 }
 
+header nav {
+  display: flex;
+  gap: 1em;
+  font-size: 0.9em;
+}
+
 header a {
   transition: all 0.1s;
 }
