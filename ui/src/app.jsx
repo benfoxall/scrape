@@ -21,7 +21,7 @@ function Router({ data }) {
 const root = createRoot(document.getElementById("app"));
 
 try {
-  const res = await fetch("/hn.json");
+  const res = await fetch("hn.json");
   const hn = await res.json();
   root.render(<Router data={hn} />);
 } catch (e) {
