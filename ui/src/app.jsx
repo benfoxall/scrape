@@ -1,14 +1,29 @@
 import "./app.css";
 import { createRoot } from "react-dom/client";
+import { useState, useEffect } from "react";
 import { View } from "./View";
+import { CoolView } from "./CoolView";
+
+function Router({ data }) {
+  const [hash, setHash] = useState(window.location.hash);
+
+  useEffect(() => {
+    const handler = () => setHash(window.location.hash);
+    window.addEventListener("hashchange", handler);
+    return () => window.removeEventListener("hashchange", handler);
+  }, []);
+
+  // #rank / #votes / #comment are consumed internally by View via preventDefault,
+  // so they never trigger hashchange and don't affect routing here.
+  return hash === "#story-arcs" ? <CoolView data={data} /> : <View data={data} />;
+}
 
 const root = createRoot(document.getElementById("app"));
 
 try {
-  const res = await fetch("hn.json");
+  const res = await fetch("/hn.json");
   const hn = await res.json();
-
-  root.render(<View data={hn} />);
+  root.render(<Router data={hn} />);
 } catch (e) {
   root.render(<h1>Error, unable to load</h1>);
 }
